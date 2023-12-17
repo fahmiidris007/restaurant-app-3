@@ -4,6 +4,48 @@ import 'package:google_fonts/google_fonts.dart';
 const Color primaryColor = Color(0xFFFFFFFF);
 const Color secondaryColor = Color(0xFF37966F);
 const Color onPrimaryColor = Colors.black;
+const Color darkPrimaryColor = Color(0xFF121212);
+const Color darkSecondaryColor = Color(0xFF37966F);
+
+ThemeData lightTheme = ThemeData(
+  colorScheme: ThemeData.light().colorScheme.copyWith(
+    primary: primaryColor,
+    onPrimary: onPrimaryColor,
+    secondary: secondaryColor,
+  ),
+  textTheme: myTextTheme,
+  appBarTheme: const AppBarTheme(elevation: 0),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: secondaryColor,
+      onPrimary: primaryColor,
+      textStyle: myTextTheme.bodyLarge,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+  ),
+);
+
+ThemeData darkTheme = ThemeData(
+  colorScheme: ThemeData.dark().colorScheme.copyWith(
+    primary: darkPrimaryColor,
+    onPrimary: onPrimaryColor,
+    secondary: darkSecondaryColor,
+  ),
+  textTheme: myTextTheme,
+  appBarTheme: const AppBarTheme(elevation: 0),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      primary: darkSecondaryColor,
+      onPrimary: darkPrimaryColor,
+      textStyle: myTextTheme.bodyLarge,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(8),
+      ),
+    ),
+  ),
+);
 
 final TextTheme myTextTheme = TextTheme(
   displayLarge: GoogleFonts.eczar(
