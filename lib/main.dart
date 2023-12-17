@@ -4,6 +4,7 @@ import 'package:restaurant_app/provider/list_restaurant_provider.dart';
 import 'package:restaurant_app/provider/search_restaurant_provider.dart';
 import 'package:restaurant_app/theme/styles.dart';
 import 'package:restaurant_app/ui/detail/detail_page.dart';
+import 'package:restaurant_app/ui/home/home_page.dart';
 import 'package:restaurant_app/ui/home/list_page.dart';
 import 'package:restaurant_app/ui/post_review/post_review_page.dart';
 import 'package:restaurant_app/ui/search/search_page.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
         ),
         home: const SplashScreen(),
         routes: {
-          RestaurantListPage.routeName: (context) => const RestaurantListPage(),
+          HomePage.routeName: (context) => const HomePage(),
           RestaurantDetailPage.routeName: (context) => RestaurantDetailPage(
                 restaurantId:
                     ModalRoute.of(context)?.settings.arguments as String,
