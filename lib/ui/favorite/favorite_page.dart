@@ -31,7 +31,7 @@ class _RestaurantFavoritePageState extends State<RestaurantFavoritePage> {
               },
             );
           } else if (provider.state == ResultState.noData) {
-            return const Center(child: Text('Empty Data'));
+            return Center(child: Text(provider.message));
           } else if (provider.state == ResultState.error) {
             return Center(child: Text(provider.message));
           } else {

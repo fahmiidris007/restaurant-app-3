@@ -24,7 +24,7 @@ class DatabaseProvider extends ChangeNotifier{
       _state = ResultState.hasData;
     } else {
       _state = ResultState.noData;
-      _message = 'Empty Data';
+      _message = 'Favorite Restaurant not found';
     }
     notifyListeners();
   }
@@ -35,7 +35,7 @@ class DatabaseProvider extends ChangeNotifier{
       getFavorites();
     } catch (e) {
       _state = ResultState.error;
-      _message = 'Error: $e';
+      _message = 'Add Favorite Restaurant failed';
       notifyListeners();
     }
   }
@@ -51,7 +51,7 @@ class DatabaseProvider extends ChangeNotifier{
       getFavorites();
     } catch (e) {
       _state = ResultState.error;
-      _message = 'Error: $e';
+      _message = 'Remove Favorite Restaurant failed';
       notifyListeners();
     }
   }
