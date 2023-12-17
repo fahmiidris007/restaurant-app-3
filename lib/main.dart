@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:restaurant_app/provider/database_provider.dart';
 import 'package:restaurant_app/provider/list_restaurant_provider.dart';
 import 'package:restaurant_app/provider/preferences_provider.dart';
 import 'package:restaurant_app/provider/search_restaurant_provider.dart';
@@ -13,6 +14,7 @@ import 'package:restaurant_app/ui/splash/splash_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/api/api_service.dart';
+import 'data/db/database_helper.dart';
 import 'data/preferences/preferences_helper.dart';
 import 'provider/detail_restaurant_provider.dart';
 
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        ChangeNotifierProvider(create: (_) => DatabaseProvider(
+          databaseHelper: DatabaseHelper(),
+        )),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, child) {
