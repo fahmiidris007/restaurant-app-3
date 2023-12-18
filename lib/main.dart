@@ -1,16 +1,22 @@
+import 'dart:io';
+
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/database_provider.dart';
 import 'package:restaurant_app/provider/list_restaurant_provider.dart';
 import 'package:restaurant_app/provider/preferences_provider.dart';
+import 'package:restaurant_app/provider/scheduling_provider.dart';
 import 'package:restaurant_app/provider/search_restaurant_provider.dart';
-import 'package:restaurant_app/theme/styles.dart';
 import 'package:restaurant_app/ui/detail/detail_page.dart';
 import 'package:restaurant_app/ui/home/home_page.dart';
-import 'package:restaurant_app/ui/home/list_page.dart';
 import 'package:restaurant_app/ui/post_review/post_review_page.dart';
 import 'package:restaurant_app/ui/search/search_page.dart';
 import 'package:restaurant_app/ui/splash/splash_screen.dart';
+import 'package:restaurant_app/utils/background_service.dart';
+import 'package:restaurant_app/utils/navigation.dart';
+import 'package:restaurant_app/utils/notification_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'data/api/api_service.dart';
@@ -18,10 +24,20 @@ import 'data/db/database_helper.dart';
 import 'data/preferences/preferences_helper.dart';
 import 'provider/detail_restaurant_provider.dart';
 
-void main() {
-  runApp(
-    const MyApp(),
-  );
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final NotificationHelper _notificationHelper = NotificationHelper();
+  final BackgroundService _service = BackgroundService();
+  _service.initializeIsolate();
+  if (Platform.isAndroid) {
+    await AndroidAlarmManager.initialize();
+  }
+  await _notificationHelper.initNotifications(flutterLocalNotificationsPlugin);
+
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -53,9 +69,13 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        ChangeNotifierProvider(create: (_) => DatabaseProvider(
-          databaseHelper: DatabaseHelper(),
-        )),
+        ChangeNotifierProvider(
+            create: (_) => DatabaseProvider(
+                  databaseHelper: DatabaseHelper(),
+                )),
+        ChangeNotifierProvider(
+          create: (_) => SchedulingProvider(),
+        ),
       ],
       child: Consumer<PreferencesProvider>(
         builder: (context, provider, child) {

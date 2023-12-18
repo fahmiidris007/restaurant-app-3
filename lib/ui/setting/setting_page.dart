@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/preferences_provider.dart';
+import 'package:restaurant_app/provider/scheduling_provider.dart';
 
 class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
@@ -30,15 +31,20 @@ class _SettingPageState extends State<SettingPage> {
               ),
               Material(
                 child: ListTile(
-                  title: const Text('Daily Reminder'),
-                  trailing: Switch.adaptive(
-                    value: provider.isRestaurantDailyActive,
-                    onChanged: (value) async {
-                      provider.enableDailyRestaurant(value);
+                  title: const Text('Daily Restaurant Reminder'),
+                  trailing: Consumer<SchedulingProvider>(
+                    builder: (context, scheduled, _) {
+                      return Switch.adaptive(
+                        value: provider.isRestaurantDailyActive,
+                        onChanged: (value) async {
+                            scheduled.scheduledRestaurant(value);
+                            provider.enableDailyRestaurant(value);
+                        },
+                      );
                     },
                   ),
+                  )
                 ),
-              ),
             ],
           );
         },
