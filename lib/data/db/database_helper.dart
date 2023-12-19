@@ -44,7 +44,10 @@ class DatabaseHelper {
 
   Future<void> insertFavorite(Restaurant restaurant) async {
     final db = await database;
-    await db!.insert(_tblFavorite, restaurant.toJson());
+    await db!.insert(
+      _tblFavorite,
+      restaurant.toJson(),
+    );
   }
 
   Future<List<Restaurant>> getFavorite() async {
@@ -56,8 +59,8 @@ class DatabaseHelper {
 
   Future<Map> getFavoriteById(String id) async {
     final db = await database;
-    List<Map<String, dynamic>> results = await db!.query(
-        _tblFavorite, where: 'id = ?', whereArgs: [id]);
+    List<Map<String, dynamic>> results =
+        await db!.query(_tblFavorite, where: 'id = ?', whereArgs: [id]);
 
     if (results.isNotEmpty) {
       return results.first;

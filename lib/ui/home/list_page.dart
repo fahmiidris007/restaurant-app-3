@@ -4,7 +4,6 @@ import 'package:restaurant_app/provider/list_restaurant_provider.dart';
 import 'package:restaurant_app/widget/card_restaurant.dart';
 
 class RestaurantListPage extends StatefulWidget {
-
   const RestaurantListPage({super.key});
 
   @override

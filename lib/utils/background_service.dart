@@ -1,5 +1,3 @@
-
-
 import 'dart:isolate';
 import 'dart:ui';
 

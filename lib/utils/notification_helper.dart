@@ -1,5 +1,3 @@
-
-
 import 'dart:convert';
 import 'dart:math';
 
@@ -9,8 +7,6 @@ import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/model/list_restaurant.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
 import 'package:rxdart/rxdart.dart';
-
-import 'navigation.dart';
 
 final selectNotificationSubject = BehaviorSubject<String>();
 
@@ -26,7 +22,7 @@ class NotificationHelper {
   Future<void> initNotifications(
       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
     var initializationSettingsAndroid =
-    const AndroidInitializationSettings('app_icon');
+        const AndroidInitializationSettings('app_icon');
 
     var initializationSettingsIOS = const DarwinInitializationSettings(
       requestAlertPermission: false,
@@ -39,12 +35,12 @@ class NotificationHelper {
 
     await flutterLocalNotificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse: (NotificationResponse details) async {
-          final payload = details.payload;
-          if (payload != null) {
-            print('notification payload: ' + payload);
-          }
-          selectNotificationSubject.add(payload ?? 'empty payload');
-        });
+      final payload = details.payload;
+      if (payload != null) {
+        print('notification payload: ' + payload);
+      }
+      selectNotificationSubject.add(payload ?? 'empty payload');
+    });
   }
 
   Future<void> showNotification(
@@ -64,7 +60,8 @@ class NotificationHelper {
 
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
-        android: androidPlatformChannelSpecifics, iOS: iOSPlatformChannelSpecifics);
+        android: androidPlatformChannelSpecifics,
+        iOS: iOSPlatformChannelSpecifics);
 
     var restaurantList = await ApiService().listRestaurant();
     var restaurantItem = restaurantList.restaurants;

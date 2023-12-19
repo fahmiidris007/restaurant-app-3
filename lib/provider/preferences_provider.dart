@@ -4,6 +4,7 @@ import 'package:restaurant_app/theme/styles.dart';
 
 class PreferencesProvider extends ChangeNotifier {
   late PreferencesHelper preferencesHelper;
+
   ThemeData get themeData => _isDarkTheme ? darkTheme : lightTheme;
 
   PreferencesProvider({required this.preferencesHelper}) {
@@ -12,11 +13,12 @@ class PreferencesProvider extends ChangeNotifier {
   }
 
   bool _isDarkTheme = false;
+
   bool get isDarkTheme => _isDarkTheme;
 
   bool _isRestaurantDailyActive = false;
-  bool get isRestaurantDailyActive => _isRestaurantDailyActive;
 
+  bool get isRestaurantDailyActive => _isRestaurantDailyActive;
 
   void _getDarkThemePreferences() async {
     _isDarkTheme = await preferencesHelper.isDarkTheme;

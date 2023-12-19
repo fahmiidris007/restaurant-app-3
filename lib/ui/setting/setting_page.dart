@@ -30,21 +30,20 @@ class _SettingPageState extends State<SettingPage> {
                 ),
               ),
               Material(
-                child: ListTile(
-                  title: const Text('Daily Restaurant Reminder'),
-                  trailing: Consumer<SchedulingProvider>(
-                    builder: (context, scheduled, _) {
-                      return Switch.adaptive(
-                        value: provider.isRestaurantDailyActive,
-                        onChanged: (value) async {
-                            scheduled.scheduledRestaurant(value);
-                            provider.enableDailyRestaurant(value);
-                        },
-                      );
-                    },
-                  ),
-                  )
+                  child: ListTile(
+                title: const Text('Daily Restaurant Reminder'),
+                trailing: Consumer<SchedulingProvider>(
+                  builder: (context, scheduled, _) {
+                    return Switch.adaptive(
+                      value: provider.isRestaurantDailyActive,
+                      onChanged: (value) async {
+                        scheduled.scheduledRestaurant(value);
+                        provider.enableDailyRestaurant(value);
+                      },
+                    );
+                  },
                 ),
+              )),
             ],
           );
         },

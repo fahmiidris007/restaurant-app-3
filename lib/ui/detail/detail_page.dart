@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_service.dart';
 import 'package:restaurant_app/data/model/detail_restaurant.dart';
 import 'package:restaurant_app/provider/detail_restaurant_provider.dart';
+import 'package:restaurant_app/provider/preferences_provider.dart';
 import 'package:restaurant_app/theme/styles.dart';
 import 'package:restaurant_app/ui/post_review/post_review_page.dart';
 
@@ -29,6 +30,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<PreferencesProvider>(context).themeData;
     return ChangeNotifierProvider<DetailRestaurantProvider>(
       create: (_) => DetailRestaurantProvider(
         apiService: ApiService(),
@@ -71,7 +73,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                             style: TextStyle(
                               color: percentSpace > 0.5
                                   ? primaryColor
-                                  : onPrimaryColor,
+                                  : theme.colorScheme.onSecondaryContainer,
                             ),
                           ),
                         );
@@ -171,7 +173,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                                 },
                                 style: ButtonStyle(
                                   backgroundColor: MaterialStateProperty.all(
-                                    Theme.of(context).colorScheme.secondary,
+                                    theme.colorScheme.secondary,
                                   ),
                                 ),
                                 child: const Text(
@@ -182,7 +184,7 @@ class _RestaurantDetailPageState extends State<RestaurantDetailPage> {
                               Container(
                                 height: 200,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: theme.colorScheme.primary,
                                   border: Border.all(color: onPrimaryColor),
                                   borderRadius: BorderRadius.circular(5.0),
                                 ),

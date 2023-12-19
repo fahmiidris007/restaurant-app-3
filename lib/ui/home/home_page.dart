@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/detail_restaurant.dart';
+import 'package:provider/provider.dart';
 import 'package:restaurant_app/main.dart';
-import 'package:restaurant_app/theme/styles.dart';
+import 'package:restaurant_app/provider/preferences_provider.dart';
 import 'package:restaurant_app/ui/detail/detail_page.dart';
 import 'package:restaurant_app/ui/favorite/favorite_page.dart';
 import 'package:restaurant_app/ui/home/list_page.dart';
@@ -37,15 +37,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<PreferencesProvider>(context).themeData;
     return Scaffold(
       body: _bottomNavIndex == 0
-          ? RestaurantListPage()
+          ? const RestaurantListPage()
           : _bottomNavIndex == 1
-              ? RestaurantFavoritePage()
-              : SettingPage(),
+              ? const RestaurantFavoritePage()
+              : const SettingPage(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _bottomNavIndex,
-        selectedItemColor: secondaryColor,
+        selectedItemColor: theme.colorScheme.secondary,
         onTap: (value) {
           setState(() {
             _bottomNavIndex = value;

@@ -2,10 +2,13 @@ import 'dart:convert';
 
 import 'package:restaurant_app/data/model/restaurant.dart';
 
-ListRestaurant listRestaurantFromJson(String str) =>
-    ListRestaurant.fromJson(json.decode(str));
+ListRestaurant listRestaurantFromJson(String str) => ListRestaurant.fromJson(
+      json.decode(str),
+    );
 
-String listRestaurantToJson(ListRestaurant data) => json.encode(data.toJson());
+String listRestaurantToJson(ListRestaurant data) => json.encode(
+      data.toJson(),
+    );
 
 class ListRestaurant {
   bool error;
@@ -25,13 +28,20 @@ class ListRestaurant {
         message: json["message"],
         count: json["count"],
         restaurants: List<Restaurant>.from(
-            json["restaurants"].map((x) => Restaurant.fromJson(x))),
+          json["restaurants"].map(
+            (x) => Restaurant.fromJson(x),
+          ),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
         "error": error,
         "message": message,
         "count": count,
-        "restaurants": List<dynamic>.from(restaurants.map((x) => x.toJson())),
+        "restaurants": List<dynamic>.from(
+          restaurants.map(
+            (x) => x.toJson(),
+          ),
+        ),
       };
 }

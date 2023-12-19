@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
@@ -8,6 +9,7 @@ import 'package:restaurant_app/data/model/detail_restaurant.dart';
 import 'package:restaurant_app/data/model/list_restaurant.dart';
 import 'package:restaurant_app/data/model/review_restaurant.dart';
 import 'package:restaurant_app/data/model/search_restaurant.dart';
+
 import 'api_service_test.mocks.dart';
 
 @GenerateMocks([http.Client])
@@ -74,8 +76,7 @@ void main() {
             ),
           ).thenAnswer(
             (_) async => http.Response(
-                '{"error":false,"founded":20,"restaurants":[]}',
-                200),
+                '{"error":false,"founded":20,"restaurants":[]}', 200),
           );
           expect(
             await ApiService(client: mockClient).searchRestaurant("Test"),

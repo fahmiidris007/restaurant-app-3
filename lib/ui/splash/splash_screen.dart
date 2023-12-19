@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/ui/home/home_page.dart';
 
-import '../home/list_page.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
 

@@ -15,7 +15,6 @@ import 'package:restaurant_app/ui/post_review/post_review_page.dart';
 import 'package:restaurant_app/ui/search/search_page.dart';
 import 'package:restaurant_app/ui/splash/splash_screen.dart';
 import 'package:restaurant_app/utils/background_service.dart';
-import 'package:restaurant_app/utils/navigation.dart';
 import 'package:restaurant_app/utils/notification_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:restaurant_app/provider/database_provider.dart';
 import 'package:restaurant_app/widget/card_restaurant.dart';
+
 import '../../utils/result_state.dart';
 
 class RestaurantFavoritePage extends StatefulWidget {
   static const favoritesTitle = 'Favorite Restaurants';
+
   const RestaurantFavoritePage({super.key});
 
   @override
