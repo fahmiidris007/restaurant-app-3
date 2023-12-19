@@ -1,17 +1,20 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:restaurant_app/data/model/detail_restaurant.dart';
 import 'package:restaurant_app/data/model/list_restaurant.dart';
 import 'package:restaurant_app/data/model/review_restaurant.dart';
 import 'package:restaurant_app/data/model/search_restaurant.dart';
 
 class ApiService {
-  static const String _baseUrl = 'https://restaurant-api.dicoding.dev/';
+  static const String baseUrl = 'https://restaurant-api.dicoding.dev/';
+  Client? client;
+
+  ApiService({this.client});
 
   Future<ListRestaurant> listRestaurant() async {
-    final response = await http.get(
-      Uri.parse('${_baseUrl}list'),
+    final response = await client!.get(
+      Uri.parse('${baseUrl}list'),
     );
     if (response.statusCode == 200) {
       return ListRestaurant.fromJson(
@@ -23,8 +26,8 @@ class ApiService {
   }
 
   Future<DetailRestaurant> detailRestaurant(String id) async {
-    final response = await http.get(
-      Uri.parse('${_baseUrl}detail/$id'),
+    final response = await client!.get(
+      Uri.parse('${baseUrl}detail/$id'),
     );
     if (response.statusCode == 200) {
       return DetailRestaurant.fromJson(
@@ -36,8 +39,8 @@ class ApiService {
   }
 
   Future<SearchRestaurant> searchRestaurant(String query) async {
-    final response = await http.get(
-      Uri.parse('${_baseUrl}search?q=$query'),
+    final response = await client!.get(
+      Uri.parse('${baseUrl}search?q=$query'),
     );
     if (response.statusCode == 200) {
       return SearchRestaurant.fromJson(json.decode(response.body));
@@ -48,8 +51,8 @@ class ApiService {
 
   Future<ReviewRestaurant> postReviewRestaurant(
       String id, String name, String review) async {
-    final response = await http.post(
-      Uri.parse('${_baseUrl}review'),
+    final response = await client!.post(
+      Uri.parse('${baseUrl}review'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'X-Auth-Token': '12345',
